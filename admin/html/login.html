@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>ورود مدیر</title>
+  <style>
+    body { background: #111; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    form { background: #222; padding: 30px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,255,0,.3); }
+    input { display: block; width: 250px; margin: 10px 0; padding: 8px; border: none; border-radius: 6px; }
+    button { background: limegreen; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <form id="loginForm">
+    <h2>ورود مدیر</h2>
+    <input type="text" name="username" placeholder="نام کاربری" required>
+    <input type="password" name="password" placeholder="رمز عبور" required>
+    <button type="submit">ورود</button>
+  </form>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const user = e.target.username.value;
+      const pass = e.target.password.value;
+
+      if (user === "arfhsdt" && pass === "20007") {
+        localStorage.setItem("isAdmin", "true"); // ذخیره وضعیت ورود
+        window.location.href = "/admin/html/index.html";
+      } else {
+        alert("❌ نام کاربری یا رمز عبور اشتباه است");
+      }
+    });
+  </script>
+</body>
+</html>

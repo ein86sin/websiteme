@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/public/css/css.css">
+    <link rel="stylesheet" href="/public/css/manegment.css">
+    <link rel="stylesheet" href="/public/css/about.css">
+    <title>درباره من</title>
+</head>
+<body dir="rtl">
+
+    <!-- <div id="navbar-placeholder"></div> -->
+
+
+<div class="about-container">
+
+
+
+  <!-- بخش پروفایل -->
+  <div class="profile">
+    <img id="profile-img" src="/img/default-avatar.png" alt="عکس من">
+    <input type="file" id="upload-profile" accept="image/*" style="display:none;">
+    <button id="edit-photo-btn">📷 تغییر عکس</button>
+
+    <h1 contenteditable="true" id="name">نام خود را وارد کنید</h1>
+    <p class="bio" contenteditable="true" id="bio">بیو خود را بنویسید...</p>
+  </div>
+
+  <!-- بخش ارتباط -->
+  <div class="contact-section">
+    <p class="contact-text" contenteditable="true" id="contact-text">
+      اطلاعات تماس خود را وارد کنید: <strong>@id</strong>
+    </p>
+
+    <div class="messengers" id="messengers" contenteditable="true">
+      <div class="messenger"><span>روبیکا</span></div>
+      <div class="messenger"><span>اینستاگرام</span></div>
+      <div class="messenger"><span>تلگرام</span></div>
+      <div class="messenger"><span>ایتا</span></div>
+    </div>
+  </div>
+
+  <!-- بخش شرایط کاری -->
+  <div class="work-conditions">
+    <h2 contenteditable="true" id="work-title">شرایط کاری من</h2>
+    <ul contenteditable="true" id="work-list">
+      <li>شرط کاری خود را بنویسید...</li>
+    </ul>
+  </div>
+
+  <!-- دکمه ذخیره -->
+  <button id="save-btn">💾 ذخیره تغییرات</button>
+
+</div>
+
+    <script src="/js/load-navbar.js"></script>
+    <script src="/js/about.js"></script>
+
+</body>
+</html>

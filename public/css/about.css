@@ -1,0 +1,125 @@
+body {
+    font-family: "Vazir", sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    color: #0b3d2e;
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* بخش پروفایل */
+.profile {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.profile img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #92c89e;
+    box-shadow: 0 0 15px #4fff9f, 0 0 30px #4fff9f;
+}
+
+.profile h1 {
+    margin: 15px 0 5px 0;
+    font-size: 28px;
+}
+
+.profile .bio {
+    font-size: 16px;
+    color: #4a6b53;
+    line-height: 1.6;
+}
+
+/* بخش ارتباط */
+.contact-section {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.contact-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #0b3d2e;
+}
+
+.messengers {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.messenger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    background-color: #a8d5ba;
+    border-radius: 12px;
+    width: 100px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.messenger i {
+    margin-bottom: 10px;
+    color: #0b3d2e;
+}
+
+.messenger span {
+    font-weight: bold;
+}
+
+.messenger:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.contact p {
+    margin: 8px 0;
+}
+
+.contact a {
+    color: #0b3d2e;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.contact a:hover {
+    color: #ffffff;
+    background-color: #76b39d;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+/* بخش شرایط کاری */
+.work-conditions {
+    background-color: #c3e0c6;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.work-conditions h2 {
+    margin-bottom: 10px;
+}
+
+.work-conditions ul {
+    list-style-type: disc;
+    padding-right: 20px;
+}
+
+.work-conditions li {
+    margin: 8px 0;
+}
+
+

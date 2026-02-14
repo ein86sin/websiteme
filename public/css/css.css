@@ -1,0 +1,171 @@
+/* ===============================
+   Navbar Base
+================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 78px;
+
+    padding: 0 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(5, 10, 8, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid rgba(29, 185, 122, 0.15);
+    z-index: 1000;
+}
+
+/* ===============================
+   Logo Section
+================================ */
+.logonav {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(29,185,122,.6);
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Optional text near logo */
+.logonav .text {
+    font-size: 14px;
+    color: #dff5ea;
+    opacity: 0.9;
+}
+
+/* ===============================
+   Header Right
+================================ */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Small profile image */
+.logome {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(29,185,122,.4);
+}
+
+.logome img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===============================
+   Clock / Language / Sky
+================================ */
+.groupnav {
+    display: flex;
+    align-items: center;
+}
+
+.time-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Shared style */
+#clock,
+#language,
+.sky {
+    font-size: 13px;
+    color: #e6f5ef;
+
+    padding: 6px 14px;
+    border-radius: 20px;
+
+    background: rgba(29,185,122,.08);
+    border: 1px solid rgba(29,185,122,.15);
+
+    cursor: pointer;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    transition: all .25s ease;
+}
+
+/* Hover effect */
+#clock:hover,
+#language:hover,
+.sky:hover {
+    background: rgba(29,185,122,.18);
+    color: #ffffff;
+}
+
+/* Language highlight */
+#language {
+    color: var(--emerald-light, #1db97a);
+    font-weight: 600;
+}
+
+/* ===============================
+   Sky States (optional – when API active)
+================================ */
+.sky.sunny {
+    color: #ffd86b;
+}
+
+.sky.cloudy {
+    color: #cfd8dc;
+}
+
+.sky.rainy {
+    color: #4fc3f7;
+}
+
+.sky.snowy {
+    color: #e1f5fe;
+}
+
+/* ===============================
+   Body offset
+================================ */
+body {
+    padding-top: 90px;
+}
+
+/* ===============================
+   Responsive
+================================ */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 16px;
+    }
+
+    #clock {
+        display: none; /* موبایل خلوت‌تر */
+    }
+
+    .logonav .text {
+        display: none;
+    }
+}
