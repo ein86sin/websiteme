@@ -16,8 +16,12 @@ function createVideoItem(savedItem, isAdmin) {
         delBtn.classList.add("delete-item-btn");
         delBtn.addEventListener("click", async () => {
             try {
-                await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
-                item.remove();
+                const response = await fetch(`/api/item/${savedItem._id}`, { 
+                    method: "DELETE"
+                });
+                if (response.ok) {
+                    item.remove();
+                }
             } catch (err) {
                 console.error("Delete error:", err);
             }
@@ -36,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const section = card.dataset.section;
         const container = card.querySelector(".card-img");
 
-        // اضافه کردن دکمه + فقط برای ادمین
         if (isAdmin) {
             const addBtn = document.createElement("button");
             addBtn.textContent = "+";
@@ -63,14 +66,18 @@ document.addEventListener("DOMContentLoaded", () => {
                             body: formData,
                         });
                         
-                        if (!res.ok) throw new Error("Upload failed");
+                        if (!res.ok) {
+                            const errorText = await res.text();
+                            alert("خطا در آپلود: " + errorText);
+                            return;
+                        }
+                        
                         const savedItem = await res.json();
-
                         const item = createVideoItem(savedItem, isAdmin);
                         container.appendChild(item);
+                        
                     } catch (err) {
-                        console.error("Upload error:", err);
-                        alert("خطا در آپلود فایل");
+                        alert("خطا در ارتباط با سرور");
                     }
                 });
             });
@@ -80,16 +87,12 @@ document.addEventListener("DOMContentLoaded", () => {
         (async () => {
             try {
                 const res = await fetch(`/api/items/${section}`);
-                if (!res.ok) throw new Error("Failed to load items");
                 const items = await res.json();
-
                 items.forEach(savedItem => {
                     const item = createVideoItem(savedItem, isAdmin);
                     container.appendChild(item);
                 });
-            } catch (err) {
-                console.error("Error loading videos:", err);
-            }
+            } catch (err) {}
         })();
     });
 });
