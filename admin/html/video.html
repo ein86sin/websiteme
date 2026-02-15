@@ -291,7 +291,32 @@ body {
     <!-- <script src="/js/admin-check.js"></script> -->
     <!-- <script src="/js/manage-videos.js"></script> -->
      <script>
-        document.addEventListener("DOMContentLoaded", () => {
+     // اول: تابع رو تعریف کن
+function createVideoItem(savedItem, isAdmin) {
+    const item = document.createElement("div");
+    item.classList.add("uploaded-item");
+
+    const vid = document.createElement("video");
+    vid.src = savedItem.fileUrl;
+    vid.controls = true;
+    item.appendChild(vid);
+
+    if (isAdmin) {
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "🗑";
+        delBtn.classList.add("delete-item-btn");
+        delBtn.addEventListener("click", async () => {
+            await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
+            item.remove();
+        });
+        item.appendChild(delBtn);
+    }
+
+    return item;
+}
+
+// بعد: کد اصلی
+document.addEventListener("DOMContentLoaded", () => {
     const isAdmin = localStorage.getItem("isAdmin") === "true";
 
     document.querySelectorAll(".card").forEach(card => {
@@ -319,7 +344,6 @@ body {
                     formData.append("file", file);
                     formData.append("section", section);
 
-                    // ✅ اصلاح: آدرس نسبی
                     const res = await fetch("/api/upload", {
                         method: "POST",
                         body: formData,
@@ -334,7 +358,6 @@ body {
 
         // لود ویدیوهای قبلی
         (async () => {
-            // ✅ اصلاح: آدرس نسبی
             const res = await fetch(`/api/items/${section}`);
             const items = await res.json();
 
@@ -344,32 +367,6 @@ body {
             });
         })();
     });
-
-    // تابع کمکی ساخت آیتم ویدیو با دکمه حذف
-    function createVideoItem(savedItem, isAdmin) {
-        const item = document.createElement("div");
-        item.classList.add("uploaded-item");
-
-        const vid = document.createElement("video");
-        vid.src = savedItem.fileUrl;
-        vid.controls = true;
-        item.appendChild(vid);
-
-        // ✅ اصلاح: استفاده از پارامتر isAdmin
-        if (isAdmin) {
-            const delBtn = document.createElement("button");
-            delBtn.textContent = "🗑";
-            delBtn.classList.add("delete-item-btn");
-            delBtn.addEventListener("click", async () => {
-                // ✅ اصلاح: آدرس نسبی
-                await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
-                item.remove();
-            });
-            item.appendChild(delBtn);
-        }
-
-        return item;
-    }
 });
      </script>
 </body>
