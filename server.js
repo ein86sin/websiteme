@@ -45,7 +45,7 @@ app.get("/admin", (req, res) => {
 });
 
 // ==================== اتصال به مونگو اطلس ====================
-mongoose.connect("mongodb+srv://arfh86sdt_db_user:admin123@cluster0.vgyorgw.mongodb.net/rezomehDB")
+mongoose.connect("mongodb+srv://arfh86sdt_db_user:3vku2Z5ZNe8QvjM@cluster0.vgyorgw.mongodb.net/rezomehDB")
 .then(() => console.log("✅ MongoDB connected"))
 .catch(err => console.error("❌ MongoDB error:", err));
 
