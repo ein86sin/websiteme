@@ -26,13 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     formData.append("file", file);
                     formData.append("section", section);
 
-                    const res = await fetch("http://localhost:4000/api/upload", {
+                    // ✅ اصلاح: آدرس نسبی
+                    const res = await fetch("/api/upload", {
                         method: "POST",
                         body: formData,
                     });
                     const savedItem = await res.json();
 
-                    const item = createVideoItem(savedItem);
+                    const item = createVideoItem(savedItem, isAdmin);
                     container.appendChild(item);
                 });
             });
@@ -40,18 +41,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // لود ویدیوهای قبلی
         (async () => {
-            const res = await fetch(`http://localhost:4000/api/items/${section}`);
+            // ✅ اصلاح: آدرس نسبی
+            const res = await fetch(`/api/items/${section}`);
             const items = await res.json();
 
             items.forEach(savedItem => {
-                const item = createVideoItem(savedItem);
+                const item = createVideoItem(savedItem, isAdmin);
                 container.appendChild(item);
             });
         })();
     });
 
     // تابع کمکی ساخت آیتم ویدیو با دکمه حذف
-    function createVideoItem(savedItem) {
+    function createVideoItem(savedItem, isAdmin) {
         const item = document.createElement("div");
         item.classList.add("uploaded-item");
 
@@ -60,12 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
         vid.controls = true;
         item.appendChild(vid);
 
+        // ✅ اصلاح: استفاده از پارامتر isAdmin
         if (isAdmin) {
             const delBtn = document.createElement("button");
             delBtn.textContent = "🗑";
             delBtn.classList.add("delete-item-btn");
             delBtn.addEventListener("click", async () => {
-                await fetch(`http://localhost:4000/api/item/${savedItem._id}`, { method: "DELETE" });
+                // ✅ اصلاح: آدرس نسبی
+                await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
                 item.remove();
             });
             item.appendChild(delBtn);

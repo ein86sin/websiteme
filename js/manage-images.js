@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 formData.append("file", file);
                 formData.append("section", section);
 
-                const res = await fetch(`http://localhost:4000/api/upload`, {
+                // ✅ اصلاح: آدرس نسبی
+                const res = await fetch(`/api/upload`, {
                     method: "POST",
                     body: formData,
                 });
@@ -41,7 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const delBtn = document.createElement("button");
                 delBtn.textContent = "🗑";
                 delBtn.addEventListener("click", async () => {
-                    await fetch(`http://localhost:4000/api/item/${savedItem._id}`, { method: "DELETE" });
+                    // ✅ اصلاح: آدرس نسبی
+                    await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
                     item.remove();
                 });
 
@@ -52,7 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // لود عکس‌های قبلی
         (async () => {
-            const res = await fetch(`http://localhost:4000/api/items/${section}`);
+            // ✅ اصلاح: آدرس نسبی
+            const res = await fetch(`/api/items/${section}`);
             const items = await res.json();
             const container = card.querySelector(".card-img");
 
@@ -67,7 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const delBtn = document.createElement("button");
                 delBtn.textContent = "🗑";
                 delBtn.addEventListener("click", async () => {
-                    await fetch(`http://localhost:4000/api/item/${savedItem._id}`, { method: "DELETE" });
+                    // ✅ اصلاح: آدرس نسبی
+                    await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
                     item.remove();
                 });
 

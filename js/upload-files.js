@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append("section", section);
 
         try {
-          const res = await fetch("http://localhost:4000/api/upload", {
+          // ✅ اصلاح: آدرس نسبی
+          const res = await fetch("/api/upload", {
             method: "POST",
             body: formData
           });
@@ -56,7 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const delBtn = document.createElement("button");
           delBtn.textContent = "🗑";
           delBtn.addEventListener("click", async () => {
-            await fetch(`http://localhost:4000/api/item/${savedItem._id}`, { method: "DELETE" });
+            // ✅ اصلاح: آدرس نسبی
+            await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
             item.remove();
           });
 
@@ -72,18 +74,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // لود فایل‌های قبلی
     (async () => {
       try {
-        const res = await fetch(`http://localhost:4000/api/items/${section}`);
+        // ✅ اصلاح: آدرس نسبی
+        const res = await fetch(`/api/items/${section}`);
         const items = await res.json();
 
         items.forEach(savedItem => {
           const item = document.createElement("div");
           item.classList.add("uploaded-item");
 
-          if (savedItem.fileType.startsWith("image/")) {
+          if (savedItem.fileType?.startsWith("image/")) {
             const img = document.createElement("img");
             img.src = savedItem.fileUrl;
             item.appendChild(img);
-          } else if (savedItem.fileType.startsWith("video/")) {
+          } else if (savedItem.fileType?.startsWith("video/")) {
             const video = document.createElement("video");
             video.src = savedItem.fileUrl;
             video.controls = true;
@@ -99,7 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const delBtn = document.createElement("button");
           delBtn.textContent = "🗑";
           delBtn.addEventListener("click", async () => {
-            await fetch(`http://localhost:4000/api/item/${savedItem._id}`, { method: "DELETE" });
+            // ✅ اصلاح: آدرس نسبی
+            await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
             item.remove();
           });
 
