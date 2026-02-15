@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
           formData.append("section", section);
 
           try {
-            const res = await fetch("http://localhost:4000/api/upload", {
+            // ✅ اصلاح: آدرس نسبی
+            const res = await fetch("/api/upload", {
               method: "POST",
               body: formData,
             });
@@ -38,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const item = document.createElement("div");
             item.classList.add("uploaded-item");
 
-            // وسط چین محتوا
             item.style.display = "flex";
             item.style.justifyContent = "center";
             item.style.alignItems = "center";
@@ -47,14 +47,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (savedItem.type === "image") {
               const img = document.createElement("img");
-              img.src = `http://localhost:4000${savedItem.fileUrl}`;
+              // ✅ اصلاح: آدرس نسبی
+              img.src = savedItem.fileUrl;
               img.style.maxWidth = "100%";
               img.style.height = "auto";
               img.style.borderRadius = "12px";
               item.appendChild(img);
             } else {
               const vid = document.createElement("video");
-              vid.src = `http://localhost:4000${savedItem.fileUrl}`;
+              // ✅ اصلاح: آدرس نسبی
+              vid.src = savedItem.fileUrl;
               vid.controls = true;
               vid.style.maxWidth = "100%";
               vid.style.height = "auto";
@@ -67,7 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
             delBtn.textContent = "🗑";
             delBtn.classList.add("delete-item-btn");
             delBtn.addEventListener("click", async () => {
-              await fetch(`http://localhost:4000/api/item/${savedItem._id}`, { method: "DELETE" });
+              // ✅ اصلاح: آدرس نسبی
+              await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
               item.remove();
             });
 
@@ -84,7 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // لود آیتم‌های قبلی
     (async () => {
       try {
-        const res = await fetch(`http://localhost:4000/api/items/${section}`);
+        // ✅ اصلاح: آدرس نسبی
+        const res = await fetch(`/api/items/${section}`);
         if (!res.ok) throw new Error("Failed to fetch items");
         const items = await res.json();
         const container = card.querySelector(".card-img");
@@ -100,14 +104,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (savedItem.type === "image") {
             const img = document.createElement("img");
-            img.src = `http://localhost:4000${savedItem.fileUrl}`;
+            // ✅ اصلاح: آدرس نسبی
+            img.src = savedItem.fileUrl;
             img.style.maxWidth = "100%";
             img.style.height = "auto";
             img.style.borderRadius = "12px";
             item.appendChild(img);
           } else {
             const vid = document.createElement("video");
-            vid.src = `http://localhost:4000${savedItem.fileUrl}`;
+            // ✅ اصلاح: آدرس نسبی
+            vid.src = savedItem.fileUrl;
             vid.controls = true;
             vid.style.maxWidth = "100%";
             vid.style.height = "auto";
@@ -121,7 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
             delBtn.textContent = "🗑";
             delBtn.classList.add("delete-item-btn");
             delBtn.addEventListener("click", async () => {
-              await fetch(`http://localhost:4000/api/item/${savedItem._id}`, { method: "DELETE" });
+              // ✅ اصلاح: آدرس نسبی
+              await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
               item.remove();
             });
             item.appendChild(delBtn);
