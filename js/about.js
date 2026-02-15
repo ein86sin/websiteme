@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileImg = document.getElementById("profile-img");
   const saveBtn = document.getElementById("save-btn");
 
-  // انتخاب عکس
   editPhotoBtn.addEventListener("click", () => uploadInput.click());
   uploadInput.addEventListener("change", e => {
     const file = e.target.files[0];
@@ -15,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ذخیره در localStorage
   saveBtn.addEventListener("click", () => {
     const data = {
       name: document.getElementById("name").innerText.trim(),
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("✅ تغییرات با موفقیت ذخیره شد!");
   });
 
-  // لود اطلاعات قبلی برای ویرایش مجدد
   const savedData = JSON.parse(localStorage.getItem("aboutData"));
   if (savedData) {
     document.getElementById("name").innerText = savedData.name;
