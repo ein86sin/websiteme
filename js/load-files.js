@@ -4,14 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = card.querySelector(".card-img");
 
     try {
-      const res = await fetch(`http://localhost:4000/api/items/${section}`);
+      // ✅ اصلاح: آدرس نسبی
+      const res = await fetch(`/api/items/${section}`);
       const items = await res.json();
 
       items.forEach(savedItem => {
         const item = document.createElement("div");
         item.classList.add("uploaded-item");
 
-        // تشخیص نوع فایل
         if (savedItem.fileType.startsWith("image/")) {
           const img = document.createElement("img");
           img.src = savedItem.fileUrl;

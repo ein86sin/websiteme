@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const section = card.dataset.section;
         const container = card.querySelector(".card-img");
 
-        const res = await fetch(`http://localhost:4000/api/items/${section}`);
+        // ✅ اصلاح: آدرس نسبی
+        const res = await fetch(`/api/items/${section}`);
         const items = await res.json();
 
         items.forEach(savedItem => {
