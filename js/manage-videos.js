@@ -1,3 +1,34 @@
+// تابع ساخت آیتم ویدیو
+function createVideoItem(savedItem, isAdmin) {
+    const item = document.createElement("div");
+    item.classList.add("uploaded-item");
+
+    const vid = document.createElement("video");
+    vid.src = savedItem.fileUrl;
+    vid.controls = true;
+    vid.style.maxWidth = "100%";
+    vid.style.maxHeight = "100%";
+    item.appendChild(vid);
+
+    if (isAdmin) {
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "🗑";
+        delBtn.classList.add("delete-item-btn");
+        delBtn.addEventListener("click", async () => {
+            try {
+                await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
+                item.remove();
+            } catch (err) {
+                console.error("Delete error:", err);
+            }
+        });
+        item.appendChild(delBtn);
+    }
+
+    return item;
+}
+
+// کد اصلی
 document.addEventListener("DOMContentLoaded", () => {
     const isAdmin = localStorage.getItem("isAdmin") === "true";
 
@@ -26,55 +57,39 @@ document.addEventListener("DOMContentLoaded", () => {
                     formData.append("file", file);
                     formData.append("section", section);
 
-                    // ✅ اصلاح: آدرس نسبی
-                    const res = await fetch("/api/upload", {
-                        method: "POST",
-                        body: formData,
-                    });
-                    const savedItem = await res.json();
+                    try {
+                        const res = await fetch("/api/upload", {
+                            method: "POST",
+                            body: formData,
+                        });
+                        
+                        if (!res.ok) throw new Error("Upload failed");
+                        const savedItem = await res.json();
 
-                    const item = createVideoItem(savedItem, isAdmin);
-                    container.appendChild(item);
+                        const item = createVideoItem(savedItem, isAdmin);
+                        container.appendChild(item);
+                    } catch (err) {
+                        console.error("Upload error:", err);
+                        alert("خطا در آپلود فایل");
+                    }
                 });
             });
         }
 
         // لود ویدیوهای قبلی
         (async () => {
-            // ✅ اصلاح: آدرس نسبی
-            const res = await fetch(`/api/items/${section}`);
-            const items = await res.json();
+            try {
+                const res = await fetch(`/api/items/${section}`);
+                if (!res.ok) throw new Error("Failed to load items");
+                const items = await res.json();
 
-            items.forEach(savedItem => {
-                const item = createVideoItem(savedItem, isAdmin);
-                container.appendChild(item);
-            });
+                items.forEach(savedItem => {
+                    const item = createVideoItem(savedItem, isAdmin);
+                    container.appendChild(item);
+                });
+            } catch (err) {
+                console.error("Error loading videos:", err);
+            }
         })();
     });
-
-    // تابع کمکی ساخت آیتم ویدیو با دکمه حذف
-    function createVideoItem(savedItem, isAdmin) {
-        const item = document.createElement("div");
-        item.classList.add("uploaded-item");
-
-        const vid = document.createElement("video");
-        vid.src = savedItem.fileUrl;
-        vid.controls = true;
-        item.appendChild(vid);
-
-        // ✅ اصلاح: استفاده از پارامتر isAdmin
-        if (isAdmin) {
-            const delBtn = document.createElement("button");
-            delBtn.textContent = "🗑";
-            delBtn.classList.add("delete-item-btn");
-            delBtn.addEventListener("click", async () => {
-                // ✅ اصلاح: آدرس نسبی
-                await fetch(`/api/item/${savedItem._id}`, { method: "DELETE" });
-                item.remove();
-            });
-            item.appendChild(delBtn);
-        }
-
-        return item;
-    }
 });
