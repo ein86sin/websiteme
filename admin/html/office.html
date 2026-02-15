@@ -12,7 +12,11 @@
 <body dir="rtl">
     <!-- <div id="navbar-placeholder"></div> -->
 
-
+   <script>
+        if (localStorage.getItem("isAdmin") !== "true") {
+            window.location.href = "/admin-login";
+        }
+    </script>
 
     <div class="groups">
   <div class="card" data-section="powerpoint">

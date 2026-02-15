@@ -11,7 +11,11 @@
 
 </head>
 <body dir="rtl">
-
+   <script>
+        if (localStorage.getItem("isAdmin") !== "true") {
+            window.location.href = "/admin-login";
+        }
+    </script>
     <!-- <div id="navbar-placeholder"></div> -->
 
  <div class="groups">
