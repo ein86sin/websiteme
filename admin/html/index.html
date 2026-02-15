@@ -525,7 +525,12 @@
 </head>
 
 <body dir="rtl">
-
+<script>
+  // چک کردن وضعیت ورود
+  if (localStorage.getItem("isAdmin") !== "true") {
+    window.location.href = "/admin-login"; // اگه لاگین نبودی بفرست به صفحه لاگین
+  }
+</script>
 
     <div class="contaner">
 
