@@ -25,8 +25,8 @@
       const pass = e.target.password.value;
 
       if (user === "arfhsdt" && pass === "20007") {
-        localStorage.setItem("isAdmin", "true"); // ذخیره وضعیت ورود
-        window.location.href = "/admin/html/index.html";
+        localStorage.setItem("isAdmin", "true");
+        window.location.href = "/admin";  // ✅ اصلاح شد
       } else {
         alert("❌ نام کاربری یا رمز عبور اشتباه است");
       }
